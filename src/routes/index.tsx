@@ -339,6 +339,7 @@ function Index() {
   useReveal();
   return (
     <div className="min-h-screen flex flex-col">
+      <AnnouncementBar />
       <Header />
       <main className="flex-1">
         <Hero />
