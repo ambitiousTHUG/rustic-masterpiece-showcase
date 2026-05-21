@@ -87,6 +87,23 @@ function useReveal() {
   }, []);
 }
 
+function AnnouncementBar() {
+  return (
+    <div className="bg-primary text-primary-foreground text-[11px] sm:text-xs tracking-[0.18em] uppercase py-2.5 px-4 text-center">
+      Сайт находится в разработке студией{" "}
+      <a
+        href="https://scopegfx.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="underline underline-offset-2 hover:text-accent-foreground"
+      >
+        SCOPEGFX
+      </a>{" "}
+      — скоро откроемся
+    </div>
+  );
+}
+
 function Header() {
   const [open, setOpen] = useState(false);
   const links = [
@@ -96,12 +113,12 @@ function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 backdrop-blur-md bg-background/80">
+    <header className="sticky top-0 z-40 border-b border-border/60 backdrop-blur-md bg-background/85">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="font-serif text-xl sm:text-2xl tracking-[0.18em] text-primary">
+        <a href="#top" className="font-serif text-xl sm:text-2xl tracking-[0.32em] text-primary">
           ARTSTARINA
         </a>
-        <nav className="hidden md:flex items-center gap-10 text-sm text-foreground/80">
+        <nav className="hidden md:flex items-center gap-12 text-xs tracking-[0.28em] uppercase text-foreground/75">
           {links.map((l) => (
             <a key={l.href} href={l.href} className="hover:text-accent transition-colors">
               {l.label}
@@ -130,12 +147,12 @@ function Header() {
           className={`absolute right-0 top-0 h-full w-80 max-w-[85%] parchment-card border-l border-border shadow-2xl transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
         >
           <div className="flex items-center justify-between h-16 px-6 border-b border-border/60">
-            <span className="font-serif tracking-[0.18em] text-primary">ARTSTARINA</span>
+            <span className="font-serif tracking-[0.28em] text-primary">ARTSTARINA</span>
             <button aria-label="Закрыть меню" onClick={() => setOpen(false)} className="p-2 -mr-2">
               <X className="h-6 w-6" />
             </button>
           </div>
-          <nav className="flex flex-col px-6 py-8 gap-6 text-lg font-serif">
+          <nav className="flex flex-col px-6 py-8 gap-6 text-sm tracking-[0.28em] uppercase">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -155,27 +172,29 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="parchment-bg border-b border-border/60">
-      <div className="mx-auto max-w-5xl px-5 sm:px-8 py-20 sm:py-32 text-center fade-in">
-        <p className="text-xs sm:text-sm tracking-[0.4em] text-accent uppercase mb-6">
-          Авторская мастерская
+    <section id="top" className="parchment-hero border-b border-border/60">
+      <div className="mx-auto max-w-3xl px-5 sm:px-8 py-24 sm:py-36 text-center fade-in">
+        <p className="text-[11px] sm:text-xs tracking-[0.45em] text-primary/70 uppercase mb-10">
+          Мастерская дерева
         </p>
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl leading-[1.05] text-foreground">
-          ARTSTARINA — <span className="italic text-primary">Искусство дерева</span><br className="hidden sm:block" />
-          {" "}для вашего сада
+        <h1 className="font-serif font-semibold text-6xl sm:text-7xl md:text-[6rem] leading-[1] text-primary tracking-tight">
+          ARTSTARINA
         </h1>
-        <div className="mx-auto mt-10 h-px w-24 bg-border" />
-        <p className="mx-auto mt-10 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+        <p className="mt-6 font-serif italic text-2xl sm:text-3xl text-primary/85">
+          — Искусство дерева для вашего сада
+        </p>
+        <div className="mx-auto mt-8 h-px w-20 bg-primary/40" />
+        <p className="mx-auto mt-10 max-w-xl text-[15px] sm:text-base leading-[1.85] text-foreground/80">
           Ручное производство деревянных изделий для дачи и загородного дома. Работаю с деревом
           уже долгое время. Изготавливаю функциональные и долговечные предметы интерьера и сада —
           от садовой мебели до светильников. Использую отборные породы дерева, безопасные пропитки
           и проверенную фурнитуру. Делаю так, чтобы ваше загородное хозяйство радовало глаз и
           служило годами.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-4">
+        <div className="mt-12">
           <a
             href="#catalog"
-            className="inline-flex items-center justify-center rounded-sm bg-primary text-primary-foreground px-7 py-3 text-sm tracking-widest uppercase hover:bg-accent transition-colors"
+            className="inline-flex items-center justify-center border border-primary/70 text-primary px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             Смотреть каталог
           </a>
