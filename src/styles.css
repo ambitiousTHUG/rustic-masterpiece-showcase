@@ -110,6 +110,20 @@
     background-position: center;
   }
 
+  .parchment-hero {
+    background-color: #efe4cc;
+    background-image: url("/parchment.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  @media (max-width: 640px) {
+    .parchment-hero {
+      background-size: cover;
+    }
+  }
+
   .parchment-card {
     background-image:
       linear-gradient(rgba(245, 235, 215, 0.85), rgba(245, 235, 215, 0.85)),
