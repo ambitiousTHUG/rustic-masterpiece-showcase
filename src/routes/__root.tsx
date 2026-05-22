@@ -76,9 +76,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Авторские деревянные изделия ручной работы для дачи и загородного дома." },
       { name: "author", content: "ARTSTARINA" },
       { property: "og:title", content: "ARTSTARINA — Искусство дерева для вашего сада" },
-      { property: "og:description", content: "Авторские деревянные изделия ручной работы." },
+      { property: "og:description", content: "Авторские деревянные изделия ручной работы для дачи и загородного дома." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ARTSTARINA — Искусство дерева для вашего сада" },
+      { name: "twitter:description", content: "Авторские деревянные изделия ручной работы для дачи и загородного дома." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52b63e96-1e4d-4c8c-8ebc-23996b2bd32b/id-preview-a9c1d4c7--51f00428-805b-4392-8ef6-50abae765dc9.lovable.app-1779362174560.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/52b63e96-1e4d-4c8c-8ebc-23996b2bd32b/id-preview-a9c1d4c7--51f00428-805b-4392-8ef6-50abae765dc9.lovable.app-1779362174560.png" },
     ],
     links: [
       {
