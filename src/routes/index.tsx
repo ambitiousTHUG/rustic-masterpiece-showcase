@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 import { Menu, X, MapPin, Phone, MessageCircle } from "lucide-react";
 import babaYaga from "@/assets/baba-yaga-house.png";
 import bear from "@/assets/bear.jpeg";
 import lantern from "@/assets/lantern.png";
-import winterHouse from "@/assets/winter-house.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,19 +18,17 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ARTSTARINA — Искусство дерева для вашего сада" },
       {
         property: "og:description",
-        content:
-          "Авторские деревянные изделия ручной работы для дачи и загородного дома.",
+        content: "Авторские деревянные изделия ручной работы для дачи и загородного дома.",
       },
     ],
     links: [
-      {
-        rel: "preconnect",
-        href: "https://fonts.googleapis.com",
-      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap",
       },
+      { rel: "preload", as: "image", href: babaYaga, fetchpriority: "high" } as never,
     ],
   }),
   component: Index,
@@ -46,19 +44,12 @@ const products = [
     desc: "Высота 1 м 70 см, ширина корня 1 м 70 см. Премиальная садовая скульптура.",
     price: "20 000 ₽",
     img: babaYaga,
-    featured: true,
   },
   {
     title: "Медведь",
     desc: "Резная фигура медведя из массива. Ручная работа, защитная пропитка.",
     price: "20 000 ₽",
     img: bear,
-  },
-  {
-    title: "Избушка на корнях",
-    desc: "Декоративный домик на природном корне. Состаренное дерево, кровля‑щепа.",
-    price: "18 000 ₽",
-    img: winterHouse,
   },
   {
     title: "Подсвечник / Светильник",
@@ -68,59 +59,77 @@ const products = [
   },
 ];
 
-function useReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("fade-in");
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.12 },
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+function useSmoothScroll() {
+  return useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return;
+    const el = document.querySelector(href);
+    if (!el) return;
+    e.preventDefault();
+    const top = (el as HTMLElement).getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top, behavior: "smooth" });
+    history.replaceState(null, "", href);
   }, []);
 }
 
-function AnnouncementBar() {
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+};
+
+function Reveal({ children, className, delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
-    <div className="bg-primary text-primary-foreground text-[11px] sm:text-xs tracking-[0.18em] uppercase py-2.5 px-4 text-center">
-      Сайт находится в разработке студией{" "}
-      <a
-        href="https://scopegfx.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="underline underline-offset-2 hover:text-accent-foreground"
-      >
-        SCOPEGFX
-      </a>{" "}
-      — скоро откроемся
-    </div>
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.18 }}
+      variants={fadeUp}
+      transition={{ delay }}
+    >
+      {children}
+    </motion.div>
   );
 }
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const smoothScroll = useSmoothScroll();
   const links = [
     { href: "#catalog", label: "Каталог" },
     { href: "#about", label: "О мастере" },
     { href: "#contacts", label: "Контакты" },
   ];
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    smoothScroll(e, href);
+    setOpen(false);
+  };
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 backdrop-blur-md bg-background/85">
+    <header className="sticky top-0 z-40 border-b border-border/60 backdrop-blur-md bg-background/85 will-change-transform">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 h-16 flex items-center justify-between">
-        <a href="#top" className="font-serif text-xl sm:text-2xl tracking-[0.32em] text-primary">
+        <a
+          href="#top"
+          onClick={(e) => handleClick(e, "#top")}
+          className="font-serif text-xl sm:text-2xl tracking-[0.32em] text-primary"
+        >
           ARTSTARINA
         </a>
         <nav className="hidden md:flex items-center gap-12 text-xs tracking-[0.28em] uppercase text-foreground/75">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-accent transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={(e) => handleClick(e, l.href)}
+              className="hover:text-accent transition-colors"
+            >
               {l.label}
             </a>
           ))}
@@ -136,15 +145,16 @@ function Header() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-50 md:hidden transition ${open ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-50 md:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!open}
       >
         <div
-          className={`absolute inset-0 bg-foreground/40 transition-opacity ${open ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 bg-foreground/40 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
           onClick={() => setOpen(false)}
         />
         <aside
-          className={`absolute right-0 top-0 h-full w-80 max-w-[85%] parchment-card border-l border-border shadow-2xl transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
+          style={{ transform: open ? "translate3d(0,0,0)" : "translate3d(100%,0,0)" }}
+          className="absolute right-0 top-0 h-full w-80 max-w-[85%] parchment-card border-l border-border shadow-2xl transition-transform duration-300 ease-out will-change-transform"
         >
           <div className="flex items-center justify-between h-16 px-6 border-b border-border/60">
             <span className="font-serif tracking-[0.28em] text-primary">ARTSTARINA</span>
@@ -157,7 +167,7 @@ function Header() {
               <a
                 key={l.href}
                 href={l.href}
-                onClick={() => setOpen(false)}
+                onClick={(e) => handleClick(e, l.href)}
                 className="text-foreground hover:text-accent transition-colors"
               >
                 {l.label}
@@ -171,9 +181,15 @@ function Header() {
 }
 
 function Hero() {
+  const smoothScroll = useSmoothScroll();
   return (
     <section id="top" className="parchment-hero border-b border-border/60">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8 py-24 sm:py-36 text-center fade-in">
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="mx-auto max-w-3xl px-5 sm:px-8 py-24 sm:py-36 text-center"
+      >
         <p className="text-[11px] sm:text-xs tracking-[0.45em] text-primary/70 uppercase mb-10">
           Мастерская дерева
         </p>
@@ -194,35 +210,39 @@ function Hero() {
         <div className="mt-12">
           <a
             href="#catalog"
-            className="inline-flex items-center justify-center border border-primary/70 text-primary px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors"
+            onClick={(e) => smoothScroll(e, "#catalog")}
+            className="inline-flex items-center justify-center border border-primary/70 text-primary px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
           >
             Смотреть каталог
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
-function ProductCard({ p }: { p: (typeof products)[number] }) {
+function ProductCard({ p, index }: { p: (typeof products)[number]; index: number }) {
   return (
-    <article
-      data-reveal
-      className="group parchment-card border border-border/70 rounded-sm overflow-hidden flex flex-col"
+    <motion.article
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4 }}
+      className="group parchment-card border border-border/70 rounded-sm overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-[0_18px_40px_-20px_rgba(90,60,30,0.45)] hover:border-accent/60"
     >
       <div className="aspect-[4/5] overflow-hidden bg-muted">
         <img
           src={p.img}
           alt={p.title}
           loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.03]"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
         />
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
         <h3 className="font-serif text-2xl text-foreground">{p.title}</h3>
-        {p.desc && (
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
-        )}
+        {p.desc && <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.desc}</p>}
         <div className="mt-5 flex items-baseline justify-between border-t border-border/60 pt-5">
           <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Цена</span>
           <span className="font-serif text-xl text-primary">{p.price}</span>
@@ -231,27 +251,27 @@ function ProductCard({ p }: { p: (typeof products)[number] }) {
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-sm border border-primary text-primary px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors"
+          className="mt-5 inline-flex items-center justify-center rounded-sm border border-primary text-primary px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
         >
           Узнать о наличии
         </a>
       </div>
-    </article>
+    </motion.article>
   );
 }
 
 function Catalog() {
   return (
-    <section id="catalog" className="py-20 sm:py-28">
+    <section id="catalog" className="py-20 sm:py-28 scroll-mt-20">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="text-center mb-14" data-reveal>
+        <Reveal className="text-center mb-14">
           <p className="text-xs tracking-[0.4em] text-accent uppercase mb-4">Каталог</p>
           <h2 className="font-serif text-3xl sm:text-5xl text-foreground">Изделия мастерской</h2>
           <div className="mx-auto mt-6 h-px w-16 bg-border" />
-        </div>
+        </Reveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-9">
-          {products.map((p) => (
-            <ProductCard key={p.title} p={p} />
+          {products.map((p, i) => (
+            <ProductCard key={p.title} p={p} index={i} />
           ))}
         </div>
       </div>
@@ -261,8 +281,8 @@ function Catalog() {
 
 function About() {
   return (
-    <section id="about" className="parchment-bg border-y border-border/60 py-20 sm:py-28">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8 text-center" data-reveal>
+    <section id="about" className="parchment-bg border-y border-border/60 py-20 sm:py-28 scroll-mt-20">
+      <Reveal className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
         <p className="text-xs tracking-[0.4em] text-accent uppercase mb-4">О мастере</p>
         <h2 className="font-serif text-3xl sm:text-5xl text-foreground">
           Дерево, время и руки мастера
@@ -283,15 +303,15 @@ function About() {
             «Хорошая вещь должна радовать глаз и служить — не сезон, а поколения.»
           </p>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
 
 function Contacts() {
   return (
-    <section id="contacts" className="py-20 sm:py-28">
-      <div className="mx-auto max-w-3xl px-5 sm:px-8 text-center" data-reveal>
+    <section id="contacts" className="py-20 sm:py-28 scroll-mt-20">
+      <Reveal className="mx-auto max-w-3xl px-5 sm:px-8 text-center">
         <p className="text-xs tracking-[0.4em] text-accent uppercase mb-4">Контакты</p>
         <h2 className="font-serif text-3xl sm:text-5xl text-foreground">Связаться с мастером</h2>
         <div className="mx-auto mt-6 h-px w-16 bg-border" />
@@ -314,12 +334,12 @@ function Contacts() {
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors"
+          className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           <MessageCircle className="h-4 w-4" />
           Написать в Max Messenger
         </a>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -336,10 +356,8 @@ function Footer() {
 }
 
 function Index() {
-  useReveal();
   return (
     <div className="min-h-screen flex flex-col">
-      <AnnouncementBar />
       <Header />
       <main className="flex-1">
         <Hero />
