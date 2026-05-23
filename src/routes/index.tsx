@@ -278,7 +278,7 @@ function Hero() {
           <a
             href="#catalog"
             onClick={(e) => smoothScroll(e, "#catalog")}
-            className="inline-flex items-center justify-center bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
+            className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
           >
             Смотреть каталог
           </a>
