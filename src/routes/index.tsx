@@ -308,7 +308,7 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-sm border border-primary text-primary px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+          className="mt-5 inline-flex items-center justify-center rounded-sm bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           Узнать о наличии
         </a>
