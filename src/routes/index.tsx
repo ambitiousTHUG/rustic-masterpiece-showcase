@@ -13,6 +13,7 @@ import bench from "@/assets/bench.jpg";
 import woodSlices from "@/assets/wood-slices.png";
 import roots from "@/assets/roots.png";
 import meotis from "@/assets/meotis-stone.png";
+import babaYaga2 from "@/assets/baba-yaga-2.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -70,6 +71,7 @@ const products = [
     desc: "Брашированная, с выраженной текстурой. Длина 1 м 70 см, ширина 60 см.",
     price: "14 000 ₽",
     img: chandelier,
+    contain: true,
   },
   {
     title: "Вешалка с текстурой",
@@ -82,11 +84,19 @@ const products = [
     desc: "Покрытие маслом и воском. Длина 1 м 10 см.",
     price: "4 000 ₽",
     img: hangerOil,
+    contain: true,
+  },
+  {
+    title: "Домик Бабы Яги для вашей дачи",
+    desc: "Высота 1 м 20 см, ширина корня 1 м 30 см.",
+    price: "15 000 ₽",
+    img: babaYaga2,
+    contain: true,
   },
   {
     title: "Башня-замок",
     desc: "Декоративная садовая башня из массива. Высота 1 м.",
-    price: "400 ₽",
+    price: "4 000 ₽",
     img: towerCastle,
   },
   {
@@ -268,7 +278,7 @@ function Hero() {
           <a
             href="#catalog"
             onClick={(e) => smoothScroll(e, "#catalog")}
-            className="inline-flex items-center justify-center bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
+            className="inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
           >
             Смотреть каталог
           </a>
@@ -288,13 +298,13 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
       whileHover={{ y: -4 }}
       className="group parchment-card border border-border/70 rounded-sm overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-[0_18px_40px_-20px_rgba(90,60,30,0.45)] hover:border-accent/60"
     >
-      <div className="aspect-[4/5] overflow-hidden bg-muted">
+      <div className="aspect-[4/5] overflow-hidden bg-background">
         <img
           src={p.img}
           alt={p.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+          className={`h-full w-full ${p.contain ? "object-contain p-4" : "object-cover"} transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]`}
         />
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
@@ -308,11 +318,12 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-sm bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
+          className="mt-5 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           Узнать о наличии
         </a>
       </div>
+
     </motion.article>
   );
 }
@@ -391,7 +402,7 @@ function Contacts() {
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
+          className="mt-10 inline-flex items-center justify-center gap-3 rounded-full bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           <MessageCircle className="h-4 w-4" />
           Написать в Max Messenger
