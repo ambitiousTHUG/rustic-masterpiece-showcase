@@ -71,6 +71,7 @@ const products = [
     desc: "Брашированная, с выраженной текстурой. Длина 1 м 70 см, ширина 60 см.",
     price: "14 000 ₽",
     img: chandelier,
+    contain: true,
   },
   {
     title: "Вешалка с текстурой",
@@ -83,6 +84,7 @@ const products = [
     desc: "Покрытие маслом и воском. Длина 1 м 10 см.",
     price: "4 000 ₽",
     img: hangerOil,
+    contain: true,
   },
   {
     title: "Домик Бабы Яги для вашей дачи",
