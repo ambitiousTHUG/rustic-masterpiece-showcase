@@ -268,7 +268,7 @@ function Hero() {
           <a
             href="#catalog"
             onClick={(e) => smoothScroll(e, "#catalog")}
-            className="inline-flex items-center justify-center border border-primary/70 text-primary px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+            className="inline-flex items-center justify-center bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
           >
             Смотреть каталог
           </a>
@@ -407,6 +407,17 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
         <span className="font-serif tracking-[0.18em] text-primary">ARTSTARINA</span>
         <span>© 2026 ARTSTARINA. Все права защищены.</span>
+        <span>
+          Сайт разработан{" "}
+          <a
+            href="https://scopegfx.lovable.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-accent transition-colors underline-offset-2 hover:underline"
+          >
+            scopegfx studios
+          </a>
+        </span>
       </div>
     </footer>
   );
