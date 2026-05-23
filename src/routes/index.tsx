@@ -402,7 +402,7 @@ function Contacts() {
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-10 inline-flex items-center justify-center gap-3 rounded-sm bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
+          className="mt-10 inline-flex items-center justify-center gap-3 rounded-full bg-primary text-primary-foreground px-8 py-4 text-sm tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           <MessageCircle className="h-4 w-4" />
           Написать в Max Messenger
