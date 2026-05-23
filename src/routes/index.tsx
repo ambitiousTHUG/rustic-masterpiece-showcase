@@ -298,13 +298,13 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
       whileHover={{ y: -4 }}
       className="group parchment-card border border-border/70 rounded-sm overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-[0_18px_40px_-20px_rgba(90,60,30,0.45)] hover:border-accent/60"
     >
-      <div className="aspect-[4/5] overflow-hidden bg-muted">
+      <div className="aspect-[4/5] overflow-hidden bg-background">
         <img
           src={p.img}
           alt={p.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]"
+          className={`h-full w-full ${p.contain ? "object-contain p-4" : "object-cover"} transition-transform duration-[1200ms] ease-out group-hover:scale-[1.05]`}
         />
       </div>
       <div className="p-6 sm:p-7 flex flex-col flex-1">
@@ -318,11 +318,12 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-sm bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
+          className="mt-5 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           Узнать о наличии
         </a>
       </div>
+
     </motion.article>
   );
 }
