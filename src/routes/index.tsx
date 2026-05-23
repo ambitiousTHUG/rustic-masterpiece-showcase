@@ -13,6 +13,7 @@ import bench from "@/assets/bench.jpg";
 import woodSlices from "@/assets/wood-slices.png";
 import roots from "@/assets/roots.png";
 import meotis from "@/assets/meotis-stone.png";
+import babaYaga2 from "@/assets/baba-yaga-2.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -84,9 +85,16 @@ const products = [
     img: hangerOil,
   },
   {
+    title: "Домик Бабы Яги для вашей дачи",
+    desc: "Высота 1 м 20 см, ширина корня 1 м 30 см.",
+    price: "15 000 ₽",
+    img: babaYaga2,
+    contain: true,
+  },
+  {
     title: "Башня-замок",
     desc: "Декоративная садовая башня из массива. Высота 1 м.",
-    price: "400 ₽",
+    price: "4 000 ₽",
     img: towerCastle,
   },
   {
