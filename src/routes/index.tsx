@@ -5,6 +5,14 @@ import { Menu, X, MapPin, Phone, MessageCircle } from "lucide-react";
 import babaYaga from "@/assets/baba-yaga-house.png";
 import bear from "@/assets/bear.jpeg";
 import lantern from "@/assets/lantern.png";
+import chandelier from "@/assets/chandelier.png";
+import hangerTextured from "@/assets/hanger-textured.png";
+import hangerOil from "@/assets/hanger-oil.png";
+import towerCastle from "@/assets/tower-castle.png";
+import bench from "@/assets/bench.jpg";
+import woodSlices from "@/assets/wood-slices.png";
+import roots from "@/assets/roots.png";
+import meotis from "@/assets/meotis-stone.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,7 +44,7 @@ export const Route = createFileRoute("/")({
 
 const PHONE_DISPLAY = "+7 (920) 380-33-38";
 const PHONE_RAW = "+79203803338";
-const MAX_LINK = "https://max.me/+79203803338";
+const MAX_LINK = "https://max.ru/join/enmh4l6PS61i-nbXhs98wL4NZemvWmGp17Aa4FtkF4o";
 
 const products = [
   {
@@ -56,6 +64,54 @@ const products = [
     desc: "Настенный светильник на массивной деревянной основе с кованым держателем.",
     price: "3 000 ₽",
     img: lantern,
+  },
+  {
+    title: "Люстра «Орех»",
+    desc: "Брашированная, с выраженной текстурой. Длина 1 м 70 см, ширина 60 см.",
+    price: "14 000 ₽",
+    img: chandelier,
+  },
+  {
+    title: "Вешалка с текстурой",
+    desc: "Брашированная фактура дерева. Длина 75 см, высота 55 см.",
+    price: "3 000 ₽",
+    img: hangerTextured,
+  },
+  {
+    title: "Вешалка «Масло-воск»",
+    desc: "Покрытие маслом и воском. Длина 1 м 10 см.",
+    price: "4 000 ₽",
+    img: hangerOil,
+  },
+  {
+    title: "Башня-замок",
+    desc: "Декоративная садовая башня из массива. Высота 1 м.",
+    price: "400 ₽",
+    img: towerCastle,
+  },
+  {
+    title: "Лавка из сосны",
+    desc: "Массив сосны, покрытие маслом и воском. Прочная и долговечная.",
+    price: "20 000 ₽",
+    img: bench,
+  },
+  {
+    title: "Спилы",
+    desc: "Деревянные спилы различных пород и размеров.",
+    price: "500 ₽",
+    img: woodSlices,
+  },
+  {
+    title: "Корни",
+    desc: "Натуральные корни любых размеров для декора и ландшафта.",
+    price: "Цена по договорённости",
+    img: roots,
+  },
+  {
+    title: "Камень меотис",
+    desc: "Природный камень меотис для садовых композиций.",
+    price: "8 000 ₽",
+    img: meotis,
   },
 ];
 
@@ -212,7 +268,7 @@ function Hero() {
           <a
             href="#catalog"
             onClick={(e) => smoothScroll(e, "#catalog")}
-            className="inline-flex items-center justify-center border border-primary/70 text-primary px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+            className="inline-flex items-center justify-center bg-primary text-primary-foreground px-10 py-4 text-xs tracking-[0.32em] uppercase hover:bg-accent transition-colors duration-300"
           >
             Смотреть каталог
           </a>
@@ -252,7 +308,7 @@ function ProductCard({ p, index }: { p: (typeof products)[number]; index: number
           href={MAX_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-sm border border-primary text-primary px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+          className="mt-5 inline-flex items-center justify-center rounded-sm bg-primary text-primary-foreground px-5 py-3 text-xs tracking-[0.2em] uppercase hover:bg-accent transition-colors duration-300"
         >
           Узнать о наличии
         </a>
@@ -351,6 +407,17 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
         <span className="font-serif tracking-[0.18em] text-primary">ARTSTARINA</span>
         <span>© 2026 ARTSTARINA. Все права защищены.</span>
+        <span>
+          Сайт разработан{" "}
+          <a
+            href="https://scopegfx.lovable.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-accent transition-colors underline-offset-2 hover:underline"
+          >
+            scopegfx studios
+          </a>
+        </span>
       </div>
     </footer>
   );
