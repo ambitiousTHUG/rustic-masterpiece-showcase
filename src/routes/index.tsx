@@ -5,6 +5,14 @@ import { Menu, X, MapPin, Phone, MessageCircle } from "lucide-react";
 import babaYaga from "@/assets/baba-yaga-house.png";
 import bear from "@/assets/bear.jpeg";
 import lantern from "@/assets/lantern.png";
+import chandelier from "@/assets/chandelier.png";
+import hangerTextured from "@/assets/hanger-textured.png";
+import hangerOil from "@/assets/hanger-oil.png";
+import towerCastle from "@/assets/tower-castle.png";
+import bench from "@/assets/bench.jpg";
+import woodSlices from "@/assets/wood-slices.png";
+import roots from "@/assets/roots.png";
+import meotis from "@/assets/meotis-stone.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,7 +44,7 @@ export const Route = createFileRoute("/")({
 
 const PHONE_DISPLAY = "+7 (920) 380-33-38";
 const PHONE_RAW = "+79203803338";
-const MAX_LINK = "https://max.me/+79203803338";
+const MAX_LINK = "https://max.ru/join/enmh4l6PS61i-nbXhs98wL4NZemvWmGp17Aa4FtkF4o";
 
 const products = [
   {
@@ -56,6 +64,54 @@ const products = [
     desc: "Настенный светильник на массивной деревянной основе с кованым держателем.",
     price: "3 000 ₽",
     img: lantern,
+  },
+  {
+    title: "Люстра «Орех»",
+    desc: "Брашированная, с выраженной текстурой. Длина 1 м 70 см, ширина 60 см.",
+    price: "14 000 ₽",
+    img: chandelier,
+  },
+  {
+    title: "Вешалка с текстурой",
+    desc: "Брашированная фактура дерева. Длина 75 см, высота 55 см.",
+    price: "3 000 ₽",
+    img: hangerTextured,
+  },
+  {
+    title: "Вешалка «Масло-воск»",
+    desc: "Покрытие маслом и воском. Длина 1 м 10 см.",
+    price: "4 000 ₽",
+    img: hangerOil,
+  },
+  {
+    title: "Башня-замок",
+    desc: "Декоративная садовая башня из массива. Высота 1 м.",
+    price: "400 ₽",
+    img: towerCastle,
+  },
+  {
+    title: "Лавка из сосны",
+    desc: "Массив сосны, покрытие маслом и воском. Прочная и долговечная.",
+    price: "20 000 ₽",
+    img: bench,
+  },
+  {
+    title: "Спилы",
+    desc: "Деревянные спилы различных пород и размеров.",
+    price: "500 ₽",
+    img: woodSlices,
+  },
+  {
+    title: "Корни",
+    desc: "Натуральные корни любых размеров для декора и ландшафта.",
+    price: "Цена по договорённости",
+    img: roots,
+  },
+  {
+    title: "Камень меотис",
+    desc: "Природный камень меотис для садовых композиций.",
+    price: "8 000 ₽",
+    img: meotis,
   },
 ];
 
