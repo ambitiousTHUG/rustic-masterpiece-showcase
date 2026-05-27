@@ -287,12 +287,12 @@ function Hero() {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="mx-auto max-w-3xl px-5 sm:px-8 py-24 sm:py-36 text-center"
+        className="mx-auto max-w-3xl px-5 sm:px-8 py-24 sm:py-36 text-center overflow-hidden"
       >
         <p className="text-[11px] sm:text-xs tracking-[0.45em] text-primary/70 uppercase mb-10">
           Мастерская дерева
         </p>
-        <h1 className="font-serif font-semibold text-6xl sm:text-7xl md:text-[6rem] leading-[1] text-primary tracking-tight">
+        <h1 className="font-serif font-semibold text-[3.25rem] xs:text-6xl sm:text-7xl md:text-[6rem] leading-[1] text-primary tracking-tight break-words">
           ARTSTARINA
         </h1>
         <p className="mt-6 font-serif italic text-2xl sm:text-3xl text-primary/85">
