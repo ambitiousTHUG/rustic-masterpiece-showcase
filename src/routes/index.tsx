@@ -14,6 +14,10 @@ import woodSlices from "@/assets/wood-slices.png";
 import roots from "@/assets/roots.png";
 import meotis from "@/assets/meotis-stone.png";
 import babaYaga2 from "@/assets/baba-yaga-2.png";
+import hangerTextured2 from "@/assets/hanger-textured-2.jpg";
+import fence from "@/assets/fence.jpg";
+import branchesDecor from "@/assets/branches-decor.jpg";
+import keyHolder from "@/assets/key-holder.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -122,6 +126,34 @@ const products = [
     desc: "Природный камень меотис для садовых композиций.",
     price: "8 000 ₽",
     img: meotis,
+  },
+  {
+    title: "Изогнутые деревья и ветки",
+    desc: "Декоративные ветки и деревья любых размеров для сада и дачи.",
+    price: "Цена по договорённости",
+    img: branchesDecor,
+    contain: true,
+  },
+  {
+    title: "Забор на заказ",
+    desc: "Заборы любых размеров, любой сложности и по вашему чертежу.",
+    price: "Цена по договорённости",
+    img: fence,
+    contain: true,
+  },
+  {
+    title: "Ключница",
+    desc: "Покрытие маслом и воском. Длина 35 см, высота 15 см.",
+    price: "3 000 ₽",
+    img: keyHolder,
+    contain: true,
+  },
+  {
+    title: "Вешалка с текстурой (премиум)",
+    desc: "Брашированная фактура дерева. Длина 75 см, высота 55 см.",
+    price: "4 000 ₽",
+    img: hangerTextured2,
+    contain: true,
   },
 ];
 
