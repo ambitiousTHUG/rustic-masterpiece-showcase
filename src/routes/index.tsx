@@ -145,14 +145,14 @@ const products = [
     title: "Ключница",
     desc: "Покрытие маслом и воском. Длина 35 см, высота 15 см.",
     price: "3 000 ₽",
-    img: keyHolder,
+    img: hangerTextured2,
     contain: true,
   },
   {
-    title: "Вешалка с текстурой (премиум)",
+    title: "Вешалка с текстурой",
     desc: "Брашированная фактура дерева. Длина 75 см, высота 55 см.",
     price: "4 000 ₽",
-    img: hangerTextured2,
+    img: keyHolder,
     contain: true,
   },
 ];
