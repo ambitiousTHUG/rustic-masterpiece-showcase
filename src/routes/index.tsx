@@ -156,6 +156,14 @@ const products = [
     img: keyHolder,
     contain: true,
   },
+  {
+    title: "Частокол",
+    desc: "Частокол любых размеров на заказ.",
+    price: "Цена по договорённости",
+    img: palisade,
+    contain: true,
+  },
+
 ];
 
 function useSmoothScroll() {
