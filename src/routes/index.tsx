@@ -18,6 +18,7 @@ import hangerTextured2 from "@/assets/hanger-textured-2.jpg";
 import fence from "@/assets/fence.jpg";
 import branchesDecor from "@/assets/branches-decor.jpg";
 import keyHolder from "@/assets/key-holder.jpg";
+import palisade from "@/assets/palisade.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
